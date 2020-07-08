@@ -1,4 +1,4 @@
-package com.empathy.api.dto.board;
+package com.empathy.api.dto.sprint;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -12,23 +12,28 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "sprintID", "issueOrder", "issueLevel", "issueID", "projectID", "typeID", "name", "description",
-		"effort", "ownerID", "estimatedDate", "createdDate" })
-public class BacklogIssue {
+@JsonPropertyOrder({ "parentID", "sprintID", "issueLevel", "memberID", "issueID", "projectID", "typeID", "name",
+		"description", "effort", "ownerID", "estimatedDate", "createdDate" })
+public class TeamMemberSprintIssue {
+
 
 	@JsonProperty("issueID")
 	private String issueID;
 
+	@JsonProperty("parentID")
+	private String parentID;
+
 	@JsonProperty("sprintID")
 	private String sprintID;
-
-	@JsonProperty("issueOrder")
-	private String issueOrder;
-
+		
 	@JsonProperty("issueLevel")
-	private String issueLevel;
+	private Integer issueLevel;
+	
+	@JsonProperty("memberID")
+	private String memberID;
 
 	@JsonProperty("projectID")
 	private String projectID;
@@ -55,13 +60,13 @@ public class BacklogIssue {
 	@JsonProperty("createdDate")
 	private Date createdDate;
 
+	
 	@JsonProperty("metaData")
 	private Map<String, Object> metaData = new HashMap<String, Object>();
 
 	/**
 	 * @return the issueID
 	 */
-	@JsonProperty("issueID")
 	public String getIssueID() {
 		return issueID;
 	}
@@ -69,15 +74,27 @@ public class BacklogIssue {
 	/**
 	 * @param issueID the issueID to set
 	 */
-	@JsonProperty("issueID")
 	public void setIssueID(String issueID) {
 		this.issueID = issueID;
 	}
 
 	/**
+	 * @return the parentID
+	 */
+	public String getParentID() {
+		return parentID;
+	}
+
+	/**
+	 * @param parentID the parentID to set
+	 */
+	public void setParentID(String parentID) {
+		this.parentID = parentID;
+	}
+
+	/**
 	 * @return the sprintID
 	 */
-	@JsonProperty("sprintID")
 	public String getSprintID() {
 		return sprintID;
 	}
@@ -85,31 +102,41 @@ public class BacklogIssue {
 	/**
 	 * @param sprintID the sprintID to set
 	 */
-	@JsonProperty("sprintID")
 	public void setSprintID(String sprintID) {
 		this.sprintID = sprintID;
 	}
 
 	/**
-	 * @return the issueOrder
+	 * @return the issueLevel
 	 */
-	@JsonProperty("issueOrder")
-	public String getIssueOrder() {
-		return issueOrder;
+	public Integer getIssueLevel() {
+		return issueLevel;
 	}
 
 	/**
-	 * @param issueOrder the issueOrder to set
+	 * @param issueLevel the issueLevel to set
 	 */
-	@JsonProperty("issueOrder")
-	public void setIssueOrder(String issueOrder) {
-		this.issueOrder = issueOrder;
+	public void setIssueLevel(Integer issueLevel) {
+		this.issueLevel = issueLevel;
+	}
+
+	/**
+	 * @return the memberID
+	 */
+	public String getMemberID() {
+		return memberID;
+	}
+
+	/**
+	 * @param memberID the memberID to set
+	 */
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
 	}
 
 	/**
 	 * @return the projectID
 	 */
-	@JsonProperty("projectID")
 	public String getProjectID() {
 		return projectID;
 	}
@@ -117,7 +144,6 @@ public class BacklogIssue {
 	/**
 	 * @param projectID the projectID to set
 	 */
-	@JsonProperty("projectID")
 	public void setProjectID(String projectID) {
 		this.projectID = projectID;
 	}
@@ -125,7 +151,6 @@ public class BacklogIssue {
 	/**
 	 * @return the typeID
 	 */
-	@JsonProperty("typeID")
 	public IssueType getTypeID() {
 		return typeID;
 	}
@@ -133,7 +158,6 @@ public class BacklogIssue {
 	/**
 	 * @param typeID the typeID to set
 	 */
-	@JsonProperty("typeID")
 	public void setTypeID(IssueType typeID) {
 		this.typeID = typeID;
 	}
@@ -141,7 +165,6 @@ public class BacklogIssue {
 	/**
 	 * @return the name
 	 */
-	@JsonProperty("name")
 	public String getName() {
 		return name;
 	}
@@ -149,7 +172,6 @@ public class BacklogIssue {
 	/**
 	 * @param name the name to set
 	 */
-	@JsonProperty("name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -157,7 +179,6 @@ public class BacklogIssue {
 	/**
 	 * @return the description
 	 */
-	@JsonProperty("description")
 	public String getDescription() {
 		return description;
 	}
@@ -165,7 +186,6 @@ public class BacklogIssue {
 	/**
 	 * @param description the description to set
 	 */
-	@JsonProperty("description")
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -173,7 +193,6 @@ public class BacklogIssue {
 	/**
 	 * @return the effort
 	 */
-	@JsonProperty("effort")
 	public Integer getEffort() {
 		return effort;
 	}
@@ -181,7 +200,6 @@ public class BacklogIssue {
 	/**
 	 * @param effort the effort to set
 	 */
-	@JsonProperty("effort")
 	public void setEffort(Integer effort) {
 		this.effort = effort;
 	}
@@ -189,7 +207,6 @@ public class BacklogIssue {
 	/**
 	 * @return the ownerID
 	 */
-	@JsonProperty("ownerID")
 	public String getOwnerID() {
 		return ownerID;
 	}
@@ -197,7 +214,6 @@ public class BacklogIssue {
 	/**
 	 * @param ownerID the ownerID to set
 	 */
-	@JsonProperty("ownerID")
 	public void setOwnerID(String ownerID) {
 		this.ownerID = ownerID;
 	}
@@ -205,7 +221,6 @@ public class BacklogIssue {
 	/**
 	 * @return the estimatedDate
 	 */
-	@JsonProperty("estimatedDate")
 	public Date getEstimatedDate() {
 		return estimatedDate;
 	}
@@ -213,7 +228,6 @@ public class BacklogIssue {
 	/**
 	 * @param estimatedDate the estimatedDate to set
 	 */
-	@JsonProperty("estimatedDate")
 	public void setEstimatedDate(Date estimatedDate) {
 		this.estimatedDate = estimatedDate;
 	}
@@ -221,7 +235,6 @@ public class BacklogIssue {
 	/**
 	 * @return the createdDate
 	 */
-	@JsonProperty("createdDate")
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -229,34 +242,23 @@ public class BacklogIssue {
 	/**
 	 * @param createdDate the createdDate to set
 	 */
-	@JsonProperty("createdDate")
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	@JsonProperty("metaData")
-	public Map<String, Object> getMetadaData() {
-		return this.metaData;
-	}
-
-	@JsonProperty("metaData")
-	public void setMetadaData(String name, Object value) {
-		this.metaData.put(name, value);
+	/**
+	 * @return the metaData
+	 */
+	public Map<String, Object> getMetaData() {
+		return metaData;
 	}
 
 	/**
-	 * @return the issueLevel
+	 * @param metaData the metaData to set
 	 */
-	@JsonProperty("issueLevel")
-	public String getIssueLevel() {
-		return issueLevel;
+	public void setMetaData(Map<String, Object> metaData) {
+		this.metaData = metaData;
 	}
 
-	/**
-	 * @param issueLevel the issueLevel to set
-	 */
-	@JsonProperty("issueLevel")
-	public void setIssueLevel(String issueLevel) {
-		this.issueLevel = issueLevel;
-	}
+	
 }

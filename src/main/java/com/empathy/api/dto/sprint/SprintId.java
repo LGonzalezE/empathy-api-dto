@@ -1,4 +1,4 @@
-package com.empathy.api.dto.board;
+package com.empathy.api.dto.sprint;
 
 import java.io.Serializable;
 
