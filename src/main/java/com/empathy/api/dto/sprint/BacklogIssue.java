@@ -1,4 +1,4 @@
-package com.empathy.api.dto.board;
+package com.empathy.api.dto.sprint;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -6,50 +6,95 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
+import com.empathy.types.IssueStatus;
 import com.empathy.types.IssueType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "issueID", "projectID", "typeID", "name", "description", "effort", "ownerID", "estimatedDate",
-		"createdDate" })
-public class IssueTeamMemberBacklog {
+@JsonPropertyOrder({ "sprintID", "issueOrder", "issueID", "projectID", "parentID", "typeID", "statusID", "name",
+		"description", "effort", "ownerID", "estimatedDate", "createdDate", "metaData" })
+public class BacklogIssue {
+
+
+	@JsonProperty("sprintID")
+	private String sprintID;
+
+
+	@JsonProperty("issueOrder")
+	private Integer issueOrder;
 
 	@JsonProperty("issueID")
 	private String issueID;
 
-	@JsonIgnore
-	private String parentID;
 
 	@JsonProperty("projectID")
 	private String projectID;
+
+
+	@JsonProperty("parentID")
+	private String parentID;
+
 
 	@NotNull
 	@JsonProperty("typeID")
 	private IssueType typeID;
 
+	
+	@NotNull
+	@JsonProperty("statusID")
+	private IssueStatus statusID;
+
+	
 	@JsonProperty("name")
 	private String name;
 
+	
 	@JsonProperty("description")
 	private String description;
 
+	
 	@JsonProperty("effort")
 	private Integer effort;
 
+	
 	@JsonProperty("ownerID")
 	private String ownerID;
 
+	
 	@JsonProperty("estimatedDate")
 	private Date estimatedDate;
 
 	@JsonProperty("createdDate")
 	private Date createdDate;
 
+	
 	@JsonProperty("metaData")
 	private Map<String, Object> metaData = new HashMap<String, Object>();
+
+	@JsonProperty("sprintID")
+	public String getSprintID() {
+		return sprintID;
+	}
+
+	@JsonProperty("sprintID")
+	public void setSprintID(String sprintID) {
+		this.sprintID = sprintID;
+	}
+
+	@JsonProperty("issueOrder")
+	public Integer getIssueOrder() {
+		return issueOrder;
+	}
+
+	@JsonProperty("issueOrder")
+	public void setIssueOrder(Integer issueOrder) {
+		this.issueOrder = issueOrder;
+	}
 
 	@JsonProperty("issueID")
 	public String getIssueID() {
@@ -61,16 +106,6 @@ public class IssueTeamMemberBacklog {
 		this.issueID = issueID;
 	}
 
-	@JsonProperty("parentID")
-	public String getParentID() {
-		return parentID;
-	}
-
-	@JsonProperty("parentID")
-	public void setParentID(String parentID) {
-		this.issueID = parentID;
-	}
-
 	@JsonProperty("projectID")
 	public String getProjectID() {
 		return projectID;
@@ -79,6 +114,16 @@ public class IssueTeamMemberBacklog {
 	@JsonProperty("projectID")
 	public void setProjectID(String projectID) {
 		this.projectID = projectID;
+	}
+
+	@JsonProperty("parentID")
+	public String getParentID() {
+		return parentID;
+	}
+
+	@JsonProperty("parentID")
+	public void setParentID(String parentID) {
+		this.parentID = parentID;
 	}
 
 	@JsonProperty("typeID")
@@ -152,12 +197,13 @@ public class IssueTeamMemberBacklog {
 	}
 
 	@JsonProperty("metaData")
-	public Map<String, Object> getMetadaData() {
+	public Map<String, Object> getMetaData() {
 		return this.metaData;
 	}
 
 	@JsonProperty("metaData")
-	public void setMetadaData(String name, Object value) {
+	public void setMetaData(String name, Object value) {
 		this.metaData.put(name, value);
 	}
+
 }

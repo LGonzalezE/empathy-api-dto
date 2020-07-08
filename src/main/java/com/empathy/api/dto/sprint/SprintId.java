@@ -2,8 +2,6 @@ package com.empathy.api.dto.sprint;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SprintId implements Serializable {
@@ -13,7 +11,7 @@ public class SprintId implements Serializable {
 	@JsonProperty("sprintID")
 	private String sprintID;
 
-	@NotNull	
+		
 	@JsonProperty("projectID")
 	private String projectID;
 
@@ -54,5 +52,4 @@ public class SprintId implements Serializable {
 		this.projectID = projectID;
 	}
 
-	
 }

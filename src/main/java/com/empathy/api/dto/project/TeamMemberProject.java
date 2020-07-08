@@ -1,50 +1,57 @@
 package com.empathy.api.dto.project;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "projectID", "name", "description", "tags", "ownerID", "estimatedDate", "createdDate" })
-public class Project {
+@JsonPropertyOrder({ "projectID", "name", "description", "tags", "ownerID", "estimatedDate", "createdDate", "memberID",
+		"capacity" })
+public class TeamMemberProject {
 
 	@JsonProperty("projectID")
 	private String projectID;
 
+
 	@JsonProperty("name")
 	private String name;
+
 
 	@JsonProperty("description")
 	private String description;
 
+
 	@JsonProperty("tags")
 	private String tags;
+
 
 	@JsonProperty("ownerID")
 	private String ownerID;
 
+
 	@JsonProperty("estimatedDate")
 	private Date estimatedDate;
+
 
 	@JsonProperty("createdDate")
 	private Date createdDate;
 
-	@JsonIgnore
-	private Map<String, Object> metaData = new HashMap<String, Object>();
 
-	/**
-	 * No args constructor for use in serialization
-	 *
-	 */
-	public Project() {
-	}
+	@JsonProperty("memberID")
+	private String memberID;
+
+
+	@JsonProperty("capacity")
+	private Integer capacity;
+
+	@JsonProperty("metaData")
+	private Map<String, Object> metaData;
 
 	@JsonProperty("projectID")
 	public String getProjectID() {
@@ -116,14 +123,33 @@ public class Project {
 		this.createdDate = createdDate;
 	}
 
-	@JsonAnyGetter
+	@JsonProperty("memberID")
+	public String getMemberID() {
+		return memberID;
+	}
+
+	@JsonProperty("memberID")
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+
+	@JsonProperty("capacity")
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	@JsonProperty("capacity")
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	@JsonProperty("metaData")
 	public Map<String, Object> getMetaData() {
 		return this.metaData;
 	}
 
-	@JsonAnySetter
+	@JsonProperty("metaData")
 	public void setMetaData(String name, Object value) {
 		this.metaData.put(name, value);
 	}
-
 }

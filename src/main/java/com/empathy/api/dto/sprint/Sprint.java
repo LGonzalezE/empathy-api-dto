@@ -6,19 +6,22 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
+import com.empathy.types.SprintStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "sprintID", "name", "description", "startDate", "endDate", "createdBy",
-		"createdDate" })
+@JsonPropertyOrder({ "sprintID", "name", "description", "startDate", "endDate", "createdBy", "createdDate" })
 public class Sprint {
 
-	
+
 	@JsonProperty("sprintID")
 	private SprintId sprintID;
+
+	@NotNull
+	@JsonProperty("statusID")
+	private SprintStatus statusID;
 
 	@NotNull	
 	@JsonProperty("name")
@@ -27,12 +30,11 @@ public class Sprint {
 	@JsonProperty("description")
 	private String description;
 
-
-
+	@NotNull
 	@JsonProperty("startDate")
 	private Date startDate;
 
-	@NotNull
+	@NotNull	
 	@JsonProperty("endDate")
 	private Date endDate;
 
@@ -42,11 +44,10 @@ public class Sprint {
 	
 	@JsonProperty("createdDate")
 	private Date createdDate;
-
+	
 	@JsonProperty("metaData")
 	private Map<String, Object> metaData = new HashMap<String, Object>();
 
-	
 	@JsonProperty("sprintID")
 	public SprintId getSprintID() {
 		return sprintID;
@@ -55,6 +56,16 @@ public class Sprint {
 	@JsonProperty("sprintID")
 	public void setSprintID(SprintId sprintID) {
 		this.sprintID = sprintID;
+	}
+
+	@JsonProperty("statusID")
+	public SprintStatus getStatusID() {
+		return statusID;
+	}
+
+	@JsonProperty("statusID")
+	public void setName(SprintStatus statusID) {
+		this.statusID = statusID;
 	}
 
 	@JsonProperty("name")
@@ -96,7 +107,7 @@ public class Sprint {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	
+
 	@JsonProperty("endDate")
 	public Date getEndDate() {
 		return endDate;
@@ -126,6 +137,5 @@ public class Sprint {
 	public void setMetaData(String name, Object value) {
 		this.metaData.put(name, value);
 	}
-
 
 }
